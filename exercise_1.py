@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 
 csv_file = "/Users/bt/Documents/GITHUB/Faster_Pandas/faster-pandas-2832038-main/Ch01/challenge/bids.csv.xz"
+
+
 def second(values):
     """
     Return second highest value
