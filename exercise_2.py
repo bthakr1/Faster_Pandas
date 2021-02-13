@@ -11,7 +11,7 @@ def last_error_time(df):
     for _ , row in df.iterrows():
         if row['status_code'] < 400:
             continue
-        if not last_time or row['time'] > last_time:ß
+        if not last_time or row['time'] > last_time:
             last_time = row['time']
     return last_time
 
@@ -20,3 +20,9 @@ def load_df(db_file):
     conn = sqlite3.connect(db_file,detect_types=sqlite3.PARSE_DECLTYPES)
     with closing(conn):
         return pd.read_sql('SELECT * FROM logs', conn)
+
+def faster_solution(df):
+    """
+    Suggested solution by Miki
+    """
+    return df[df['status_code'] >= 400]['time'].max()
