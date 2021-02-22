@@ -8,14 +8,6 @@
  ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝       ╚═╝    ╚═════╝        ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚════╝  ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚══════╝╚══════╝    ╚═╝╚═╝╚═╝    
                                                                                                                                                                                                                                          
 """          
-                                                              
-def mathOp(a,b):
-    classic_division = a / b
-    floor_division = a // b
-    modulus = a % b
-    power = a ** b
-    return [classic_division,floor_division,modulus,power]
-
 
 # check if the number is odd or even
 
@@ -31,8 +23,12 @@ def checkParity(n):
     result = (n % 2)
     return result
 
+# check range or not
+
 def inRange(x,y):
     return (x < 1/3 < y)
+
+# multuple string 3 times
 
 def getStr(s):
     s = s[:1] + s[0] + s[1:]
@@ -45,11 +41,14 @@ def getStr(s):
     strlen = len(s)
     return [s,strlen]
 
+# find occurence of string or character
 
 def findOccurence(s):
     a = s.find("b")
     b = s.find("ccc")
     return [a,b]
+
+# change casing to upper and lower both
 
 def changeCase(s):
     upper_case = s.upper()
