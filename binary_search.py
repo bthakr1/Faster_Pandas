@@ -21,7 +21,6 @@ def binarySearch(arr,target):
 
 
 arr = [11,12,13,14,15,16,17]
-index_of_arr = [0,1,2,3,4,5,6]
 
 target = 11
 
