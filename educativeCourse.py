@@ -54,3 +54,11 @@ def changeCase(s):
     upper_case = s.upper()
     lower_case = s.lower()
     return [upper_case,lower_case]
+
+myList = [1,4,8,5]
+
+sum = 0
+
+for value in myList:
+    sum += value
+print(sum)
