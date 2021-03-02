@@ -173,5 +173,147 @@ def printEvenOdd1(n):
         else:
             print("Odd Number", n)
 
-    n = n - 1
-printEvenOdd1(10)
+        n = n - 1
+
+
+# Dictionaries
+
+# Un ordered dictionary
+
+ages = {}
+
+ages['Tom'] = 28
+ages['Peter'] = 36
+
+
+# ordered dictionary
+
+from collections import OrderedDict
+
+ages_1 = OrderedDict()
+
+ages_1["Thomas"] = 28
+ages_1["Peter"] = 36
+ages_1["Sam"] = 44
+
+
+d = {
+    0 : [0,0,0],
+    1 : [1,1,1],
+    2 : [2,2,2]
+}
+
+ages = {
+    "Peter": 10,
+    "Isabel": 11,
+    "Anna": 9,
+    "Thomas": 10,
+    "Bob": 10,
+    "Joseph": 11,
+    "Maria": 12,
+    "Gabriel": 10,
+}
+
+
+# Nested Dictionary
+
+students = {
+    "Peter": {"age": 10, "address": "Lisbon"},
+    "Isabel": {"age": 11, "address": "Sesimbra"},
+    "Anna": {"age": 9, "address": "Lisbon"},
+}
+
+
+    
+Student = {
+    "Peter": 10,
+    "Isabel": 11,
+    "Anna": 9,
+    "Thomas": 10,
+    "Bob": 10,
+    "Joseph": 11,
+    "Maria": 12,
+    "Gabriel": 10
+  }
+
+students = {
+      "Peter": {"age": 10, "address": "Lisbon"},
+      "Isabel": {"age": 11, "address": "Sesimbra"},
+      "Anna": {"age": 9, "address": "Lisbon"},
+      "Gibrael": {"age": 10, "address": "Sesimbra"},
+      "Susan": {"age": 11, "address": "Lisbon"},
+      "Charles": {"age": 9, "address": "Sesimbra"},
+  }
+
+def calculateAvg(dict1):
+    sum = 0
+    length = len(dict1)
+    for name, value in dict1.items():
+        sum += value
+    return sum /length
+        
+def calculateAvg1(dict1):
+    length = len(dict1)
+    return (sum(dict1.values()) / length)
+
+def oldestStudent(dict1):
+    value = list(dict1.values())
+    key = list(dict1.keys())
+    return key[value.index(max(value))]
+
+
+def updateAge(dict1):
+    values = list(dict1.values())
+    keys = list(dict1.keys())
+    
+    new_values = []
+
+    for i in range(0,len(values)):
+        new_values.append(values[i]+1)
+    
+    result = {keys[i]:new_values[i] for i in range(len(dict1))}
+
+    return result
+
+
+def updateAge1(ages,n):
+    new_dict = dict()
+    for x in ages:
+        new_dict[x] = ages[x] + n
+    return new_dict
+
+
+def totalStudents(dict1):
+    return len(dict1.keys())
+
+def calculateAverageAge(dict1):
+
+    add_age = 0
+
+    for thing in dict1.values():
+        age = thing['age']
+        add_age = add_age + age
+
+    return (add_age/len(dict1.keys()))
+
+def findStudents(dict1,place):
+
+    names = []
+
+    for key, subdict in dict1.items():
+        for sublist in subdict.values():
+            if (sublist == place):
+                names.append(key)
+    
+    return sorted(names)
+
+def findStudents1(dict1,place):
+    names = []
+
+    for key, value in dict1.items():
+        if value["address"] == place:
+            names.append(key)
+    
+    return sorted(names)
+
+print(findStudents1(students,"Lisbon"))
