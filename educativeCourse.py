@@ -316,4 +316,96 @@ def findStudents1(dict1,place):
     
     return sorted(names)
 
-print(findStudents1(students,"Lisbon"))
+import operator
+
+def sortedDict(dict1):
+    return sorted(dict1.items())
+
+a = {0:10,1:20,3:30}
+c = dict(a)
+c.update({4:40})
+
+
+dic1={1:10, 2:20} 
+dic2={3:30, 4:40} 
+dic3={5:50,6:60}
+
+d4 = dict(dic1)
+d4.update(dic2)
+d4.update(dic3)
+
+keys = ['Ten', 'Twenty', 'Thirty']
+values = [10, 20, 30]
+
+def createDict(k,v):
+    sampleDict = dict(zip(k,v))
+    return sampleDict
+
+dict1 = {'Ten': 10, 'Twenty': 20, 'Thirty': 30}
+dict2 = {'Thirty': 30, 'Fourty': 40, 'Fifty': 50}
+
+def mergeDict(dic1,dic2):
+    dic3 = dict(dic1)
+    dic3.update(dic2)
+    return dic3
+
+sampleDict = { 
+   "class":{ 
+      "student":{ 
+         "name":"Mike",
+         "marks":{ 
+            "physics":70,
+            "history":80
+         }
+      }
+   }
+}
+
+sampleDict1 = {
+  "name": "Kelly",
+  "age":25,
+  "salary": 8000,
+  "city": "New york"
+}
+
+
+def findNameSalary(dict1):
+
+    name = []
+    salary = []
+
+    for i , v in dict1.items():
+        if i == 'name':
+            name.append(v)
+        elif i == 'salary':
+            salary.append(v)
+
+    return name,salary
+
+
+def findNameSalary1(dict1):
+    keys = ["name","age"]
+    newDict = {k : dict1[k] for k in keys}
+    return newDict
+
+
+def removeKeys(dict1):
+    keysRemove = ["age"]
+    newDict = {k : dict1[k] for k in dict1.keys() - keysRemove}
+    return newDict
+
+sampleDict2 = {
+  'Physics': 82,
+  'Math': 65,
+  'history': 75
+}
+
+def fidMarks(dict1):
+    return min(dict1,key=dict1.get)
+
+sampleDict4 = {
+     'emp1': {'name': 'Jhon', 'salary': 7500},
+     'emp2': {'name': 'Emma', 'salary': 8000},
+     'emp3': {'name': 'Brad', 'salary': 6500}
+}
+
