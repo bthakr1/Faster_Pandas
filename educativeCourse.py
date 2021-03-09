@@ -225,7 +225,7 @@ students = {
 
 
     
-Student = {
+Student23 = {
     "Peter": 10,
     "Isabel": 11,
     "Anna": 9,
@@ -409,3 +409,212 @@ sampleDict4 = {
      'emp3': {'name': 'Brad', 'salary': 6500}
 }
 
+# Class
+
+# Porpoeties : Attributes
+# Fucntions : Methods
+
+# class Rectangle:
+
+#     def __init__(self, x1, y1, x2, y2):
+#         if x1 < x2 and y1 > y2 :
+#             self.x1 = x1
+#             self.y1 = y1
+#             self.x2 = x2
+#             self.y2 = y2
+#         else:
+#             print("Incorrect co-ordinates are given")
+
+#     def get_height(self):
+#         return self.y1 - self.y2
+
+#     def get_width(self):
+#         return self.x2 - self.x1
+
+#     def area(self):
+#         return self.get_width() * self.get_height()
+
+#     def perimeter(self):
+#         return 2 * self.get_height() * self.get_width()
+
+#     def __str__(self):
+#         return(str(self.x1)+ ',' + str(self.y1) + ',' + str(self.x2) + ',' + str(self.y2))
+
+# Inheritance
+
+class Person1:
+
+    def __init__(self,name,age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        print("Hello my name is : %s" %(self.name))
+
+class TenYearOldPerson(Person1):
+
+    def __init__(self,name):
+        Person1.__init__(self,name,10)
+
+
+    def greet(self):
+        print("I dont talk to strangers")
+
+
+class Animal:
+
+    def __init__(self,name,food,characterisitc):
+        self.name = name
+        self.food = food
+        self.characterisitc = characterisitc
+    
+    def printer(self):
+        print("I am a " + str(self.name) + ".")
+
+class Mammal(Animal):
+    def __init__(self,name,food):
+        Animal.__init__(self,name,food,"Warm blooded")
+
+class Carnivor(Animal):
+    def __init__(self,name):
+        Mammal.__init__(self,name,'meat')
+
+class Herbal(Animal):
+    def __init__(self,name):
+        Mammal.__init__(self,name,"no meat")
+
+class Phone:
+
+    def __init__(self,name,type):
+        self.name = name
+        self.type = type
+    
+    def printer(self):
+        print("I am a phone first")
+
+
+class iPhone(Phone):
+    def __init__(self,name):
+        Phone.__init__(self,name,'iPhone')
+    
+    def printer(self):
+        print("I am an {}".format(self.name))
+
+class Android(Phone):
+    def __init__(self,name):
+        Phone.__init__(self,name,'Android')
+    
+    def printer(self):
+        print("I am an {}".format(self.name))
+
+# Multiple Inheritance 
+
+# Person is the Parent Class
+
+class Person:
+    def __init__(self,name):
+        self.name = name
+
+    def greet(self):
+        print("Hi, I am " + str(self.name) + ".")
+
+# Student is a first child class
+
+class Student(Person):
+
+    def __init__(self,name,rollNumber,degree):
+        self.name = name
+        self.rollNumber = rollNumber
+        self.degree = degree
+        super().__init__(name)
+
+    def report(self):
+        print("My roll number is " + self.rollNumber + ".")
+
+    def greet(self):
+        super().greet()
+        print("I am a " + self.degree + " student.")
+
+# Teacher is also first child class
+
+class Teacher(Person):
+
+    def __init__(self,name,course):
+        self.name = name
+        self.course = course
+        #Person.__init__(self,name)
+    
+    def introduce(self):
+        print("I teach " + str(self.course) + ".")
+
+# TA is the second child class
+
+class TA(Student,Teacher):
+
+    def __init__(self,name,rollNumber,course,grade):
+        self.name = name
+        self.rollNumber = rollNumber
+        self.course = course
+        self.grade = grade
+
+    def details(self):
+        if self.grade=="A*" or self.grade=="A" or self.grade=="A-":
+            Person.greet(self)
+            Student.report(self)
+            Teacher.introduce(self)
+
+            print("I got an " + self.grade + " in " + self.course + ".")
+        
+        else:
+            print(self.name + ", you can not apply for TAship.")
+    
+
+class Rectangle:
+
+    def __init__(self,x1,y1,x2,y2):
+        self.x1 = x1
+        self.y1 = y1
+        self.x2 = x2
+        self.y2 = y2
+
+    def getLength(self):
+        return (self.x2 - self.x1)
+        
+    def getHeight(self):
+        return (self.y2 - self.y1)
+       
+    def area(self):
+        return self.getLength() * self.getHeight()
+
+
+class Square(Rectangle):
+
+    def __init__(self,x1,y1,length):
+        x2 = x1 + length
+        y2 = y1 + length
+        super().__init__(x1,y1,x2,y2)
+
+
+class Vehicle:
+
+    color = "white"
+
+    def __init__(self,name,max_speed,mileage):
+        self.name = name
+        self.max_speed = max_speed
+        self.mileage = mileage
+
+    def seating_capacity(self,capacity):
+        return f"The seating capacity of a {self.name} is {capacity} passengers"
+
+class Bus(Vehicle):
+    def seating_capacity(self,capacity = 50):
+        return super().seating_capacity(capacity=50)
+
+class Car(Vehicle):
+    pass
+
+# Iterators
+
+for value in [0,1,2,3,4,5]:
+    print(value)
