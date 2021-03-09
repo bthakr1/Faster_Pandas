@@ -616,5 +616,46 @@ class Car(Vehicle):
 
 # Iterators
 
-for value in [0,1,2,3,4,5]:
-    print(value)
+
+class MyRange:
+
+    def __init__(self,a,b):
+        self.a = a
+        self.b = b
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if self.a < self.b:
+            value = self.a
+            self.a += 1
+            if self.a % 2 == 0:
+                return value
+            else:
+                pass
+        else:
+            return StopIteration
+
+
+class StopRange:
+
+    def __init__(self,n):
+        self.n = n
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        evenArray = []
+        for i in range(1,self.n+1):
+            if i % 2 == 0:
+                value = i
+                evenArray.append(i)
+            else:
+                i+=1
+        return evenArray
+
+
+a = StopRange(34)
+print(a.next())
