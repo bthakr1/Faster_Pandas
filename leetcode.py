@@ -123,4 +123,33 @@ def richest_customer2(accounts):
         maximum = max(sum(wealth),maximum)
     return maximum
 
-print(richest_customer2([[1,2,3],[3,2,2]]))
+# Number of good pairs
+
+# A pair of (i,j) is called good if nums[i] == nums[j] and i < j
+
+# nums = [1,2,3,1,1,3]
+
+# 1 has 2
+# 2 has 0
+# 3 has 1
+# 1 has 1
+
+# result = 4
+
+def good_pairs(nums):
+
+    pairs = 0
+    d = {}
+
+    for i in nums:
+        if i in d:
+            d[i] += 1
+        else:
+            d[i] = 1
+    for num in d:
+        val = d[num]
+        for i in range(val):
+            pairs += 1
+    return pairs
+
+print(good_pairs([1,2,3,1,1,3]))
