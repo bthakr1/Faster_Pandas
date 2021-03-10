@@ -657,5 +657,42 @@ class StopRange:
         return evenArray
 
 
-a = StopRange(34)
-print(a.next())
+class DownToZero:
+
+    def __init__(self,n):
+        self.n = n
+
+    def __iter__(self):
+        return self
+    
+    def next(self):
+        myArray = []
+        for i in range(self.n,-1,-1):
+            myArray.append(i)
+
+        return myArray
+
+
+class Fibonacci:
+
+    def __init__(self,n):
+        self.n = n
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        fib = []
+        for i in range(self.n):
+            if i == 0 or i == 1:
+                fib.append(i)
+            else:
+                fib.append(fib[i-2]+fib[i-1])
+        return fib
+
+
+def Fib(n):
+    f0, f1 = 0,1
+    for _ in range(n):
+        yield f0
+        f0, f1 = f1 , f0+f1
