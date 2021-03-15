@@ -152,4 +152,161 @@ def good_pairs(nums):
             pairs += 1
     return pairs
 
-print(good_pairs([1,2,3,1,1,3]))
+# Jewels and Stones
+
+# jewels = "aA"
+# stones = "aAAbbbb"
+
+# result = 3
+
+# how many of the stones are in jewels
+
+def find_jewels(jewels,stones):
+    counter = 0
+    jewels = set(jewels)
+    for stone in stones:
+        if stone in jewels:
+            counter += 1
+    return counter
+
+def find_jewels1(jewels,stones):
+    return sum(i in jewels for i in stones)
+
+def find_jewels2(jewels,stones):
+    result = 0
+    for i in set(jewels):
+        result += stones.count(i)
+    return result
+
+
+# count items matching a rule
+
+# Input: items = [["phone","blue","pixel"],["computer","silver","lenovo"],["phone","gold","iphone"]], ruleKey = "color", ruleValue = "silver"
+# Output: 1
+# Explanation: There is only one item matching the given rule, which is ["computer","silver","lenovo"].
+
+def match_items(items,ruleKey,ruleValue):
+    ruleKeys = ["type","color","name"]
+    ruleKeyIndex = ruleKeys.index(ruleKey)
+
+    
+    c = 0
+
+    for i in range(len(items)):
+        if items[i][ruleKeyIndex] == ruleValue:
+            c += 1
+    
+    return c
+
+def match_items1(items,ruleKey,ruleValue):
+    return sum((ruleKey,ruleValue) in (('type',t),('color',c),('name',n)) for t,c,n in items)
+
+# Design parking system
+
+# Input
+# ["ParkingSystem", "addCar", "addCar", "addCar", "addCar"]
+# [[1, 1, 0], [1], [2], [3], [1]]
+# Output
+# [null, true, true, false, false]
+
+class ParkingSystem:
+
+    def __init__(self,big,medium,small):
+        self.vehicle = [big,medium,small]
+
+    def addCar(self,carType):
+
+        if carType == 1:
+            if self.vehicle[0] > 0:
+                self.vehicle[0] -= 1
+                return True
+
+        elif carType == 2:
+            if self.vehicle[1] > 0:
+                self.vehicle[1] -= 1
+                return True
+
+        elif carType == 3:
+            if self.vehicle[2] > 0:
+                self.vehicle -= 1
+                return True
+
+        return False
+
+# how many numbers are smaller than the current number
+
+# Input : nums = [8,1,2,2,3]
+
+# output = [4,0,1,1,3]
+
+def smaller_numbers(nums):
+
+    return [len([k for k in nums if k <n]) for n in nums]
+
+    
+# Number of steps to reduce a number to zero
+
+# Input num = 14
+# Output 6
+# 14 / 2 = 7 :1
+# 7-1 = 6 :2
+# 6 / 2 = 3 :3
+# 3 -1 = 2 : 4
+# 2 / 2 = 1 : 5
+# 1 - 1 = 0 : 6
+
+def reduce_number(nums):
+
+    count = 0
+
+    while nums > 0:
+        if nums % 2 == 0:
+            nums = nums // 2
+        else:
+            nums = nums - 1
+        count += 1
+
+    return count
+
+# check prime number
+
+def check_prime(nums):
+
+    if nums > 1:
+
+        for i in range(2,nums):
+            if (nums % i ) == 0:
+                print(nums,"is not a prime number")
+                print(i,"time",nums//i,"is",nums)
+                break
+        else:
+            print(nums,"is a prime number")
+
+    else:
+        print(nums,"is not a prime number")
+
+# Sort Python Dictionaries by Key or Value
+
+def dictionary():
+
+    key_value = {}
+
+    key_value[2] = '64'       
+    key_value[1] = '69'
+    key_value[4] = '23'
+    key_value[5] = '65'
+    key_value[6] = '34'
+    key_value[3] = '76'
+
+    print('Task 1: -\n')
+    print("Keys are")
+
+    for i in sorted(key_value.keys()):
+        print(i, end=" ")
+        print(" ")
+    
+def main():
+    dictionary()
+
+if __name__=="__main__":
+    main()
