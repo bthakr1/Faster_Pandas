@@ -298,15 +298,57 @@ def dictionary():
     key_value[6] = '34'
     key_value[3] = '76'
 
-    print('Task 1: -\n')
+    print('Task 1: Displaying the Keys Alphabetically')
     print("Keys are")
 
     for i in sorted(key_value.keys()):
         print(i, end=" ")
-        print(" ")
+        print("\n")
+
+    print("Task 2 : Keys and Values sorted in ")
+    
+    for i in sorted(key_value):
+        print((i, key_value[i]), end=' ')
+        print("\n")
+
+    print("Task 3 : Same as part (ii), but sorted in alphabetical order by the value.")
+
+    print(sorted(key_value.items(),key= lambda kv :(kv[1],kv[0])))
+
     
 def main():
     dictionary()
 
-if __name__=="__main__":
-    main()
+# if __name__=="__main__":
+#     main()
+
+from collections import OrderedDict
+
+dict1 = {'ravi':'10','rajnish':'9','sanjeev':'15','yash':'2','suraj':'32'}
+
+dict2 = (sorted(dict1))
+
+# Shuffle String
+
+# Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
+# Output: "leetcode"
+# Explanation: As shown, "codeleet" becomes "leetcode" after shuffling.
+
+def restoreString(s,indices):
+
+    return ''.join(ch for _, ch in sorted(zip(indices,s)))
+
+
+
+def restoreString1(s,indices):
+
+    sList = list(s)
+    
+    for i, e in enumerate(indices):
+
+        sList[e] = s[i]
+
+        return ''.join(sList)
+
+print(restoreString1('codeleet',[4,5,6,7,0,2,1,3]))
+

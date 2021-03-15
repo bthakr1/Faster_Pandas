@@ -696,3 +696,46 @@ def Fib(n):
     for _ in range(n):
         yield f0
         f0, f1 = f1 , f0+f1
+
+# Iterator
+
+def myrange(a,b):
+    while a < b:
+        yield a 
+        a += 1
+
+# yield works similar to return but wakes up the function every time its being used
+# yield retains state to enable function to resume where it is left off.
+
+def simpleGen():
+    yield 1
+    yield 2
+    yield 3
+
+
+def nextSquare():
+
+    i = 1
+
+    while True:
+        yield i*i
+        i += 1
+
+# for num in nextSquare():
+#     if num > 100:
+#         break
+#     print(num)
+
+def square(n):
+    for value in range(n):
+        yield value * value
+
+sqr = square(8)
+print(next(sqr))
+print(next(sqr))
+print(next(sqr))
+print(next(sqr))
+print(next(sqr))
+print(next(sqr))
+print(next(sqr))
+print(next(sqr))
