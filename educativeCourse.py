@@ -730,12 +730,35 @@ def square(n):
     for value in range(n):
         yield value * value
 
-sqr = square(8)
-print(next(sqr))
-print(next(sqr))
-print(next(sqr))
-print(next(sqr))
-print(next(sqr))
-print(next(sqr))
-print(next(sqr))
-print(next(sqr))
+def getOdd(n):
+    for value in range(n+1):
+        if value % 2 != 0:
+            yield value
+
+
+def reverse11(n):
+
+    for value in range(n,-1,-1):
+        yield value
+
+def Fibonacci11(n):
+
+    myArray = []
+
+    for i in range(n):
+
+        if i is 0 or i is 1:
+            myArray.append(i)
+            yield i
+        else:
+            x = myArray[i-2] + myArray[i-1]
+            myArray.append(x)
+            yield x
+
+# Asynchronous Code
+
+import asyncio
+
+async def my_function(argument):
+    pass
+
