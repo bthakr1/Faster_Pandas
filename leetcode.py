@@ -374,5 +374,88 @@ def coinToss():
     print(str(recordList))
     print(str(recordList.count("Heads")) + str(recordList.count("Tails")))
 
+# Find prime number
 
-coinToss()
+# More effecient method 
+
+def is_Prime(n):
+
+    if (n <= 1):
+        return False
+
+    if (n <= 3):
+        return True
+
+    if (n % 2 == 0 or n % 3 == 0):
+        return False
+
+    i = 5
+
+    while (i * i <= n):
+        if (n % i == 0 or n % (i+2) == 0):
+            return False
+        i = i + 6
+
+    return True
+
+# Less efficient method
+
+def is_Prime1(num):
+
+    if num <= 1:
+        return False
+
+    for i in range(2,n):
+        if n % i == 0:
+            return False
+    return True
+
+
+# Not leetcode but random
+
+# Find Prime Factors
+
+# Input : 13
+# Output : 13
+# Input : 39
+# Output : 3,13
+# Input : 46
+# Output : 2,23
+
+
+def prime_Factor(num):
+
+    prime_factors = []
+
+    i = 2
+
+    while i <= num :
+        if (num % i) == 0:
+            prime_factors.append(i)
+            num = num / i
+        else:
+            i = i + 1
+    return sorted(list(set(prime_factors)))
+
+import string
+import re
+
+def find_Palindrome(str):
+    
+    s = str.lower() # make string lower case to compare
+    s = s.replace(" ","") # remove spaces from the string
+    s = re.sub(r'[^\w\s]','',s) # removes punctuations from the string
+
+    if s == s[::-1]:
+        return True
+    else:
+        return False
+
+# one more way to do it
+
+def find_Palindrome1(str):
+
+    forwards = ''.join(re.findall(r'[a-z]+',str.lower()))
+    backwords = forwards[::-1]
+    return forwards == backwords
+
