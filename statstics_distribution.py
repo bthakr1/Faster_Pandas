@@ -51,7 +51,7 @@ sample_props_20 = []
 
 for i in range(10_000):
     sample = np.random.choice(puppies, size=20, replace=True)
-    sample_props_20.append(sample)
+    sample_props_20.append(sample.mean())
 
 sample_props_20 = np.array(sample_props_20)
 
@@ -67,8 +67,37 @@ plt.hist(sample_props,bins=bins,label="Sample Props with 5 sample size")
 plt.hist(sample_props_20,bins=bins,label="Sample Props with 20 sample size")
 plt.title("Histogram with sample size of 5 vs 20")
 plt.legend(loc='upper left')
-plt.show()
+#plt.show()
 
 
 # Law of large number
+
+# As the sample size increases, the sample mean will get closer to the population mean
+
+new_puppies = np.random.choice(puppies,size=100,replace=True)
+
+hundred_sample_props = []
+
+for i in range(10_000):
+    sample = np.random.choice(puppies,size=100,replace=True)
+    hundred_sample_props.append(sample.mean())
+
+hundred_sample_props = np.array(hundred_sample_props)
+
+# We will increase size in the following lines of code
+# You will see with the increase in sample size, the mean of samples
+# gets closer to the population mean
+
+
+print("Origina Mean (also Population): ", puppies.mean())
+print("Mean with 5 samples : " , np.random.choice(puppies,size=5,replace=True).mean())
+print("Mean with 20 samples : ", np.random.choice(puppies,size=20,replace=True).mean())
+print("Mean with 100 samples : ", np.random.choice(puppies,size=100,replace=True).mean())
+print("Mean with 1000 samples : ", np.random.choice(puppies,size=1000, replace=True).mean())
+print("Mean with 10,000 samples : ", np.random.choice(puppies,size=10_000, replace=True).mean())
+
+# Central Limit Theorem
+
+# With a large enough sample size, the sampling distribution of the the mean will be 
+# normally distributed
 
