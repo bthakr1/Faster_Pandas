@@ -134,13 +134,110 @@ for i in range(10_000):
     mean_size_30.append(np.random.choice(puppies_data,size=(1,30),replace=True).mean())
 
 
-plt.figure(figsize=(7,10))
-plt.hist(mean_size_3,label="Mean with sample size of 3")
-plt.hist(mean_size_10,label="Mean with sample size of 10")
-plt.hist(mean_size_20,label="Mean with sample size of 20")
-plt.hist(mean_size_30,label="Mean with sample size of 30")
-plt.axvline(puppies_data.mean(),color='k',linestyle='dashed',linewidth=1)
-plt.legend(loc='upper right')
-plt.show()
+# plt.figure(figsize=(7,10))
+# plt.hist(mean_size_3,label="Mean with sample size of 3")
+# plt.hist(mean_size_10,label="Mean with sample size of 10")
+# plt.hist(mean_size_20,label="Mean with sample size of 20")
+# plt.hist(mean_size_30,label="Mean with sample size of 30")
+# plt.axvline(puppies_data.mean(),color='k',linestyle='dashed',linewidth=1)
+# plt.legend(loc='upper right')
+# plt.show()
 
+
+# Poisson Distribution 
+
+# Type of Discrete Distribution
+
+# Estimates how many times an event can happend in specified time. 
+# Describe the probability that an event will occur a certain number of times in a 
+# fixed time or space interval.
+
+# Model for a series of discrete event where the average time between events is knows,
+# but the exact timing is random.
+
+# Events are memoryless. Arrival of an event is independent of event before and after. 
+
+# Meets the following criteria.
+
+# 1. Events are independent of each other.
+# 2. Average rate (event per period ) is constant.
+# 3. Two events cannot occur at the same time.
+
+# Number of emails recieved in an hour
+# number of leaves in a grass patch
+# number of customers walking in a day
+
+# lambda is the rate of known number of occurences or number of events
+# size is the size of array
+
+from scipy.stats import poisson
+import seaborn as sns
+
+# mu is the lambda
+# size is the number of variate in the distribution
+
+data_points = poisson.rvs(mu=3,size=10_000)
+
+# Graphical Representation
+
+# ax = sns.distplot(data_points,
+#                 bins=30,
+#                 kde=True,
+#                 color='skyblue',
+#                 hist_kws={'linewidth':15,'alpha':1})
+# ax.set(xlabel='Poisson Distribution', ylabel='Frequency')
+# plt.show()
+
+
+# Let's see if Law of large number works for poisson distribution
+# Again, we are checking if the "sample mean" comes close to the "population mean"
+# if we increase the sample size
+
+
+print("Population mean of Poisson Process : ", data_points.mean())
+print("Sample mean of Poisson Process with 5 Samples : ", np.random.choice(data_points,5,replace=True).mean())
+print("Sample mean of Poisson Process with 10 Samples : ", np.random.choice(data_points,10,replace=True).mean())
+print("Sample mean of Poisson Process with 20 Samples : ", np.random.choice(data_points,20,replace=True).mean())
+print("Sample mean of Poisson Process with 30 Samples : ", np.random.choice(data_points,30,replace=True).mean())
+print("Sample mean of Poisson Process with 40 Samples : ", np.random.choice(data_points,40,replace=True).mean())
+print("Sample mean of Poisson Process with 80 Samples : ", np.random.choice(data_points,80,replace=True).mean())
+
+
+# We can see the sample mean becomes closer to the Population mean with increase in sample size
+
+
+# Now, let's check with Central Limit Theorem with Poisson Process
+# It suggests that with large enough sample size the sampling distribution 
+# of means will follow normal or Gaussian Distribution
+
+sample_mean_poisson_5 = []
+sample_mean_poisson_10 = []
+sample_mean_poisson_20 = []
+sample_mean_poisson_30 = []
+sample_mean_poisson_40 = []
+sample_mean_poisson_80 = []
+
+for i in range(10_000):
+
+    sample_mean_poisson_5.append(np.random.choice(data_points,5,replace=True).mean())
+    sample_mean_poisson_10.append(np.random.choice(data_points,10,replace=True).mean())
+    sample_mean_poisson_20.append(np.random.choice(data_points,20,replace=True).mean())
+    sample_mean_poisson_30.append(np.random.choice(data_points,30,replace=True).mean())
+    sample_mean_poisson_40.append(np.random.choice(data_points,40,replace=True).mean())
+    sample_mean_poisson_80.append(np.random.choice(data_points,80,replace=True).mean())
+
+
+# Graphical Representation
+
+# plt.figure(figsize=(7,10))
+# plt.hist(sample_mean_poisson_5,label="Mean with sample size of 5")
+# plt.hist(sample_mean_poisson_10,label="Mean with sample size of 10")
+# plt.hist(sample_mean_poisson_20,label="Mean with sample size of 20")
+# plt.hist(sample_mean_poisson_30,label="Mean with sample size of 30")
+# plt.hist(sample_mean_poisson_40,label="Mean with sample size of 40")
+# plt.hist(sample_mean_poisson_80,label="Mean with sample size of 80")
+# plt.axvline(data_points.mean(),color='k',linestyle='dashed',linewidth=1)
+# plt.title("Central Limit Theorem for Poisson Process")
+# plt.legend(loc='upper right')
+# plt.show()
 
