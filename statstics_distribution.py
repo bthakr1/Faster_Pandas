@@ -146,8 +146,6 @@ for i in range(10_000):
 
 # Poisson Distribution 
 
-# Type of Discrete Distribution
-
 # Estimates how many times an event can happend in specified time. 
 # Describe the probability that an event will occur a certain number of times in a 
 # fixed time or space interval.
@@ -207,7 +205,7 @@ print("Sample mean of Poisson Process with 80 Samples : ", np.random.choice(data
 
 
 # Now, let's check with Central Limit Theorem with Poisson Process
-# It suggests that with large enough sample size the sampling distribution 
+# CLT suggests that with large enough sample size the sampling distribution 
 # of means will follow normal or Gaussian Distribution
 
 sample_mean_poisson_5 = []

@@ -459,3 +459,27 @@ def find_Palindrome1(str):
     backwords = forwards[::-1]
     return forwards == backwords
 
+# sort the word in a list
+
+# Input : 'string of words'
+# Output : 'of string words'
+
+# Input : 'banana Apple Orange'
+# Output : 'Apple banana Orange'
+
+
+def sort_Words(str1):
+
+    words = str1.split()
+
+    words = [w.lower() + w for w in words]
+
+    words.sort()
+
+    words = [w[len(w)//2:] for w in words]
+
+    return words
+
+
+
+print(sort_Words('I am a boy. She is a girl'))
