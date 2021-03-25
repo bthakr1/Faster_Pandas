@@ -5,6 +5,8 @@
 # Stephanie Glen. "Binomial Distribution: Formula, What it is and How to use it" 
 # From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/probability-and-statistics/binomial-theorem/binomial-distribution-formula/
 
+# https://www.mathopolis.com/index.php
+# https://www.mathsisfun.com/data/binomial-distribution.html
 
 # Sampling Distributions
 
@@ -419,5 +421,72 @@ T = binom(6,0.5)
 
 print("Probability of getting at most 2 Tails in 6 trials is : ", "{0:.4f}".format(T.cdf(2)))
 
-# A fair cubical die is thrown four times.
-# Use the binomial probability formula to calculate the probability of at least two 3's.
+# A fair coin is tossed 100 times. What is the probability that:
+# a.  heads will appear exactly 52 times?
+# b.  there will be at most 52 heads?
+# c.  there will be at least 48 heads?  
+
+T = binom(100,0.5)
+
+print("Probability of getting Heads EXACTLY 52 times : ", "{0:.4f}".format(T.pmf(52)))
+
+print("Probability of getting AT MOST 52 Heads : ", "{0:.4f}".format(T.cdf(52)))
+
+print("Probability of getting AT LEAST 48 Heads : ", "{0:.4f}".format(1-T.cdf(47)))
+
+# Law of large number for Binomial Distribution
+
+# Law of Lrage Number suggests that with enough sample size the mean of sample
+# will be close to the Population Mean
+
+# n specifieis we will get 0 or 1
+
+population_binomial = binom.rvs(n=1,p=0.5,size=100_000)
+
+# Now lets start getting samples of increasing size from the above population
+# We will start with Population Mean and then start the experiment
+
+print("Poluation mean of Binomial Distribution : ", population_binomial.mean())
+print("Sample mean with size of 5 : ", np.random.choice(population_binomial,size=5,replace=True).mean())
+print("Sample mean with size of 10 : ", np.random.choice(population_binomial,size=10,replace=True).mean() )
+print("Sample mean with size of 20 : ", np.random.choice(population_binomial,size=20,replace=True).mean())
+print("Sample mean with size of 100 : ", np.random.choice(population_binomial,size=100,replace=True).mean())
+print("Sample mean with size of 500 : ", np.random.choice(population_binomial,size=500,replace=True).mean())
+
+# Central Limit Theorem with binomial distribution
+# CLT suggests that with large enough sample size the sampling distribution of means
+# will follow normal distribution 
+
+# This time we will do experimentation with Fair Die
+# to have six possible outcomes instead of 2
+
+n1 = np.array([1,2,3,4,5,6])
+
+binomial_population = np.random.choice(n1,size=100_000,replace=True)
+
+sample_mean_binomial_5 = []
+sample_mean_binomial_10 = []
+sample_mean_binomial_20 = []
+sample_mean_binomial_100 = []
+sample_mean_binomial_500 = []
+
+for i in range(10_000):
+    sample_mean_binomial_5.append(np.random.choice(binomial_population,size=5,replace=True).mean())
+    sample_mean_binomial_10.append(np.random.choice(binomial_population,size=10,replace=True).mean())
+    sample_mean_binomial_20.append(np.random.choice(binomial_population,size=20,replace=True).mean())
+    sample_mean_binomial_100.append(np.random.choice(binomial_population,size=100,replace=True).mean())
+    sample_mean_binomial_500.append(np.random.choice(binomial_population,size=500,replace=True).mean())
+
+
+# Histogram to see the result of distribution of mean
+
+plt.figure(figsize=(7,10))
+plt.hist(sample_mean_binomial_5,label="Mean with sample size of 5")
+plt.hist(sample_mean_binomial_10,label="Mean with sample size of 10")
+plt.hist(sample_mean_binomial_20,label="Mean with sample size of 20")
+plt.hist(sample_mean_binomial_100,label="Mean with sample size of 100")
+plt.hist(sample_mean_binomial_500,label="Mean with sample size of 500")
+plt.axvline(binomial_population.mean(),color='k',linestyle='dashed',linewidth=1)
+plt.title("Central Limit Theorem for Binomial Distribution")
+plt.legend(loc='upper right')
+plt.show()
