@@ -302,3 +302,122 @@ print("Standard Deviation : %g" %np.std(data_points))
 result = binom.cdf(34,750,0.06)
 print("Probability of observing no more than 34 clicks in 750 impressions ", "{0:.4f}".format(result))
 
+# Toss a coin three times, What is the chance of getting two heads
+
+T = binom(3,0.5) # Sample Space where 3 is the n and 0.5 is the p
+print("Getting two heads if we toss coin three times : ", "{0:.4f}".format(T.pmf(2)))
+
+# What is the probability of getting 5 heads in 9 tosses.
+
+T = binom(9,0.5)
+print("Probability of getting 5 heads in 9 tosses : ", "{0:.4f}".format(T.pmf(5)))
+
+# John sells sandwiches. 70 % of people choose chickem, the rest something else.
+# What is the probability of selling 2 chicken sandwiches to the next 3 customers.
+
+T = binom(3,0.7)
+print("Probability of selling 2 chickem sandiwches to the next 3 customers : ", "{0:.4f}".format(T.pmf(2)))
+
+# A fair die is thrown four times. Calculate the probabilities of getting:
+
+# 0 Twos
+# 1 Two
+# 2 Twos
+# 3 Twos
+# 4 Twos
+
+T = binom(4,0.1667)
+
+print("Probability of getting 0 Twos : ", "{0:.4f}".format(T.pmf(0)))
+print("Probability of getting 1 Twos : ", "{0:.4f}".format(T.pmf(1)))
+print("Probability of getting 2 Twos : ", "{0:.4f}".format(T.pmf(2)))
+print("Probability of getting 3 Twos : ", "{0:.4f}".format(T.pmf(3)))
+print("Probability of getting 4 Twos : ", "{0:.4f}".format(T.pmf(4)))
+
+# Your company makes sports bikes. 90% pass final inspection (and 10% fail and need to be fixed).
+# What is the expected Mean and Variance of the 4 next inspections?
+
+T = binom(4,0.90)
+
+print("Mean of next 4 inspections : ", "{0:.4f}".format(T.mean()))
+print("Variance of next 4 inspections : ", "{0:.4f}".format(T.var()))
+
+# A fair coin is tossed five times. 
+# What is the probability of obtaining two heads?
+T = binom(5,0.5)
+print("Probability of getting 2 heads from 5 trials : ", "{0:.4f}".format(T.pmf(2)))
+
+# A fair coin is tossed seven times. 
+# What is the probability of obtaining five tails?
+T = binom(7,0.5)
+print("Probability of getting 5 tails in 7 trials : ", "{0:.4f}".format(T.pmf(5)))
+
+# A fair coin is tossed 16 times.
+# What is the mean number of Heads?
+
+T = binom(16,0.5)
+print("Mean number of heads : ", "{0:.4f}".format(T.mean()))
+
+# A fair coin is tossed 16 times.
+# What is the standard deviation for the number of Heads?
+
+print("Standard Deviation of number of Heads : ", "{0:.4f}".format(np.sqrt(T.var())))
+
+# A company makes electronic components for TV's. 
+# 95% pass final inspection (and 5% fail and need to be fixed).
+
+# 120 components are inspected in one day. What is the expected number that fail in one day?
+
+T = binom(120,0.05)
+
+print("Expected number of fail in One Day : ", "{0:.4f}".format(T.mean()))
+
+# 120 components are inspected in one day. What is the variance of the number that pass inspection in one day?
+
+T = binom(120,0.95)
+
+print("Variance of number that pass inspection in one day : ", "{0:.4f}".format(T.var()))
+
+# A fair cubical die is thrown four times.
+# Use the binomial probability formula to calculate the probability of exactly two 5's.
+
+T = binom(4,0.1667)
+
+print("Probability of getting exactly two 5s : ", "{0:.4f}".format(T.pmf(2)))
+
+# The diagram shows a spinner made up of a piece of card in the shape of a regular pentagon, with a toothpick pushed through its center. 
+# The five triangles are numbered from 1 to 5.Each time, the spinner is spun until it lands on one of the five 
+# edges of the pentagon. The spinner is spun four times.
+# Use the binomial probability formula to calculate the probability of exactly two 1's.
+
+T = binom(4,0.2)
+
+print("Probability of Exactly two 1s : ", "{0:.4f}".format(T.pmf(2)))
+
+# A fair coin is tossed five times.
+# Use the binomial probability formula to calculate the probability of at least four heads.
+
+# 1 Head
+# 2 Head
+# 3 Head
+
+T = binom(5,0.5)
+
+# Getting "at least" 4 heads means "at most" 3 Heads
+
+print("Probability of getting at least 4 heads in 5 trials " , "{0:.4f}".format(1-T.cdf(3)))
+
+# A fair coin is tossed six times.
+# Use the binomial probability formula to calculate the probability of at most two tails.
+
+T = binom(6,0.5)
+
+# At most 2 Tails means sum of all probabilities upto 2 
+# No Tails
+# 1 Tail
+# 2 Tail
+
+print("Probability of getting at most 2 Tails in 6 trials is : ", "{0:.4f}".format(T.cdf(2)))
+
+# A fair cubical die is thrown four times.
+# Use the binomial probability formula to calculate the probability of at least two 3's.
