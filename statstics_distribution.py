@@ -16,6 +16,7 @@
 # Sample is small subset of population. 
 
 import numpy as np 
+import pandas as pd
 
 # Puppies where 1 represent blue eye and 0 represent hazel eye
 
@@ -33,8 +34,6 @@ np.random.seed(123)
 # Let's simulate draw from the puppies array.
 
 sample_puppies = np.random.choice(puppies,size=(1,5),replace=True)
-
-print(sample_puppies)
 
 # mean of the draw of puppies
 
@@ -99,7 +98,7 @@ hundred_sample_props = np.array(hundred_sample_props)
 # gets closer to the population mean
 
 
-print("Origina Mean (also Population): ", puppies.mean())
+print("Population Mean : ", puppies.mean())
 print("Mean with 5 samples : " , np.random.choice(puppies,size=5,replace=True).mean())
 print("Mean with 20 samples : ", np.random.choice(puppies,size=20,replace=True).mean())
 print("Mean with 100 samples : ", np.random.choice(puppies,size=100,replace=True).mean())
@@ -118,7 +117,7 @@ print("Mean with 10,000 samples : ", np.random.choice(puppies,size=10_000, repla
 # Sample Proportions
 # Difference between sample proportions
 
-# Gamms distribution arises when the waiting time or any quantity (in denominator) are relevant to each other.
+# Gamma distribution arises when the waiting time or any quantity (in denominator) are relevant to each other.
 # Compared to Poisson , where events or rate are not related to each other. 
 # Gamms is used in queuing model, climatology, and finance. 
 # Amount of rainfall accumulated in reservoir
@@ -197,8 +196,9 @@ data_points = poisson.rvs(mu=3,size=10_000)
 # Let's see if Law of large number works for poisson distribution
 # Again, we are checking if the "sample mean" comes close to the "population mean"
 # if we increase the sample size
-
-
+print("\n")
+print("------ Poisson Process Law of Large Number ---------")
+print("\n")
 print("Population mean of Poisson Process : ", data_points.mean())
 print("Sample mean of Poisson Process with 5 Samples : ", np.random.choice(data_points,5,replace=True).mean())
 print("Sample mean of Poisson Process with 10 Samples : ", np.random.choice(data_points,10,replace=True).mean())
@@ -206,9 +206,12 @@ print("Sample mean of Poisson Process with 20 Samples : ", np.random.choice(data
 print("Sample mean of Poisson Process with 30 Samples : ", np.random.choice(data_points,30,replace=True).mean())
 print("Sample mean of Poisson Process with 40 Samples : ", np.random.choice(data_points,40,replace=True).mean())
 print("Sample mean of Poisson Process with 80 Samples : ", np.random.choice(data_points,80,replace=True).mean())
-
-
+print("\n")
+print("-------Completed Poisson Process Law of Large Number. ------------")
+print("\n")
 # We can see the sample mean becomes closer to the Population mean with increase in sample size
+
+
 
 
 # Now, let's check with Central Limit Theorem with Poisson Process
@@ -245,6 +248,70 @@ for i in range(10_000):
 # plt.title("Central Limit Theorem for Poisson Process")
 # plt.legend(loc='upper right')
 # plt.show()
+
+# Practical Examples of Poisson Distribution
+
+# In the World Cup, an average of 2.5 goals are scored each game. Modeling this situation with a Poisson distribution, what is the probability that 
+# k goals are scored in a game?
+
+# lambda = 2.5
+
+print("------------------------"*5)
+print("Probability for each Possible Outcome ")
+print("Probability of getting Zero Goal : ", "{0:.4f}".format(poisson.pmf(0,2.5)))
+print("Probability of getting one Goal :", "{0:.4f}".format(poisson.pmf(1,2.5)))
+print("Probability of getting Two Goals : ", "{0:.4f}".format(poisson.pmf(2,2.5)))
+print("Probability of getting Three Goals : ", "{0:.4f}".format(poisson.pmf(3,2.5)))
+print("Probability of getting Four Goals : ", "{0:.4f}".format(poisson.pmf(4,2.5)))
+print("------------------------"*5)
+
+
+# A fast food restaurant gets an average of 2.8 customers approaching the register every minute.
+# Assuming the number of customers approaching the register per minute follows a Poisson distribution, 
+# what is the probability that 4 customers approach the register in the next minute?
+print("\n")
+print("-----"*20)
+print("Probability of getting 4 customer Approach the Register if Lambda is 2.8 : ", "{0:.3f}".format(poisson.pmf(4,2.8)))
+print("-----"*20)
+print("\n")
+
+
+# A statistician records the number of cars that approach an intersection. He finds that an average of 1.6 cars approach the intersection every minute.
+# Assuming the number of cars that approach this intersection follows a Poisson distribution, what is the probability that 3 or more cars will approach 
+# the intersection within a minute?
+
+print("\n")
+print("-----"*20)
+print("Probability of getting 3 or more cars if the lambda is 1.6 : ", "{0:.3f}".format(1-poisson.cdf(2,1.6)))
+print("-----"*20)
+print("\n")
+
+# When a computer disk manufacturer tests a disk, it writes to the disk and then tests it using a certifier. The certifier counts the number of missing pulses or errors. 
+# The number of errors in a test area on a disk has a Poisson distribution with λ=0.2.
+# What percentage of test areas have two or fewer errors?
+
+print("\n")
+print("-----"*20)
+print("Probability of getting 2 or fewer errors if the lambda is 0.2 : ", "{0:.2f}".format(100*poisson.cdf(2,0.2)))
+print("-----"*20)
+print("\n")
+
+# Frequecny of Hurricanes in certain year
+# On average over a long period of time we get 1.2 hurricanes over a given years
+# lambda = mu = 1.2
+
+x_rvs = pd.Series(poisson.rvs(mu=1.2,size=100_000,random_state=123))
+
+# Mean of Hurricanes 
+
+print("Mean of 100_000 Hurricanes : ", x_rvs.mean())
+
+# Mean equals the mu and lambda
+
+data = x_rvs.value_counts().sort_index().to_dict()
+print(data)
+
+
 
 # Binomial Distribution 
 
@@ -480,13 +547,13 @@ for i in range(10_000):
 
 # Histogram to see the result of distribution of mean
 
-plt.figure(figsize=(7,10))
-plt.hist(sample_mean_binomial_5,label="Mean with sample size of 5")
-plt.hist(sample_mean_binomial_10,label="Mean with sample size of 10")
-plt.hist(sample_mean_binomial_20,label="Mean with sample size of 20")
-plt.hist(sample_mean_binomial_100,label="Mean with sample size of 100")
-plt.hist(sample_mean_binomial_500,label="Mean with sample size of 500")
-plt.axvline(binomial_population.mean(),color='k',linestyle='dashed',linewidth=1)
-plt.title("Central Limit Theorem for Binomial Distribution")
-plt.legend(loc='upper right')
-plt.show()
+# plt.figure(figsize=(7,10))
+# plt.hist(sample_mean_binomial_5,label="Mean with sample size of 5")
+# plt.hist(sample_mean_binomial_10,label="Mean with sample size of 10")
+# plt.hist(sample_mean_binomial_20,label="Mean with sample size of 20")
+# plt.hist(sample_mean_binomial_100,label="Mean with sample size of 100")
+# plt.hist(sample_mean_binomial_500,label="Mean with sample size of 500")
+# plt.axvline(binomial_population.mean(),color='k',linestyle='dashed',linewidth=1)
+# plt.title("Central Limit Theorem for Binomial Distribution")
+# plt.legend(loc='upper right')
+# plt.show()
