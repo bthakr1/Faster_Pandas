@@ -1,6 +1,11 @@
 # Reference Article 
 # https://towardsdatascience.com/sampling-distributions-with-python-implementation-3f4555e1d450
 
+
+# Stephanie Glen. "Binomial Distribution: Formula, What it is and How to use it" 
+# From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/probability-and-statistics/binomial-theorem/binomial-distribution-formula/
+
+
 # Sampling Distributions
 
 # Important in inferential statistics where the goal is to draw conclusion about a population
@@ -238,4 +243,62 @@ for i in range(10_000):
 # plt.title("Central Limit Theorem for Poisson Process")
 # plt.legend(loc='upper right')
 # plt.show()
+
+# Binomial Distribution 
+
+# To model binary data i.e. 1 or 0, Yes or No etc.
+# Good for modeling decisions
+
+# Important properties
+
+# 1. Set of Trials
+# 2. Probablity of Success
+
+# For example, the customer came to shop 10 times
+# but bought items only 3 times
+
+# Probablity of observing success given number of trials and probability
+# with each of them
+
+# Assumptions :
+# 1. Number of trials are independent.
+# 2. Number of trials are fixed.
+# 3. Probability of success is same between different trials.
+# 4. Only two possible outcomes. Not more than 2 or less than 2. 
+
+# binom.pmf(k) = choose(n, k) * p**k * (1-p)**(n-k)
+
+# A coin is tossed 20 times. What is the probability of getting exactly 6 heads.
+
+from scipy.stats import binom
+
+n = 10
+p = 0.5
+k = np.arange(0,11)
+
+result = binom.pmf(k,n,p)
+
+print(result)
+
+# simulating Experiment of coin toss 
+
+data_points = [binom.pmf(i,10,0.5) for i in range(11)]
+
+print("Probability of getting Exactly 6 heads from 10 trials : ", "{0:.4f}".format(binom.pmf(6,10,0.5)))
+
+print("Mean : %g" %np.mean(data_points))
+print("Standard Deviation : %g" %np.std(data_points))
+
+# An example of practical usage of the binomial distribution is to model clicks vs non-clicks on an ad banner, where the probability of success is the click-through rate. 
+# The binomial distribution may serve as an anomaly detector. Say you have displayed your ad to 750 users and 34 clicked on it. This gives a click-through rate of 4.5%. 
+# If you know the average click-through rate for all your previous ads was 6%, you might want to ask: what’s the probability of 
+# observing no more than 4.5% this time? To answer this, you can model your clicks with a binomial distribution with the success probability of 6%, which looks like this:
+
+# Probability of Success : Click Through Rate
+# n = 750
+# p = 0.045
+# p1 = 0.06
+
+result = binom.cdf(34,750,0.06)
+print("Probability of observing no more than 34 clicks in 750 impressions ", "{0:.4f}".format(result))
 
