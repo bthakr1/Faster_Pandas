@@ -12,6 +12,8 @@
 
 # https://www.askpython.com/python/normal-distribution
 
+# https://www.stat.colostate.edu/inmem/gumina/st201/recitation8/downloads/Normal%20Probabilites%20Practice.pdf
+
 # Sampling Distributions
 
 # Important in inferential statistics where the goal is to draw conclusion about a population
@@ -643,7 +645,96 @@ print("What is the probability that a person selected will be between 4.5 ft and
 
 # Law of Large number for Normal Distribution 
 
-data_points = norm.rvs(np.arange(1,50,100_000),scale=1,loc=0)
+# First create the sample space for normal distribution
 
-print(np.mean(data_points))
-print(np.std(data_points))
+data_points = norm.rvs(scale=1,loc=5,size=100_000)
+
+# Law of Large number suggests that with increase in sample size the sample mean 
+# comes closer to population mean
+
+print("\n")
+print("-----"*20)
+print("Population Mean for Normal Distribution : ", "{0:.4f}".format(np.mean(data_points)))
+print("Sample Mean for Normal Distribution with sample size of 5 : ", "{0:.4f}".format(np.random.choice(data_points,size=5,replace=True).mean()))
+print("Sample Mean for Normal Distribution with sample size of 10 : ", "{0:.4f}".format(np.random.choice(data_points,size=10,replace=True).mean()))
+print("Sample Mean for Normal Distribution with sample size of 20 : ", "{0:.4f}".format(np.random.choice(data_points,size=20,replace=True).mean()))
+print("Sample Mean for Normal Distribution with sample size of 100 : ", "{0:.4f}".format(np.random.choice(data_points,size=100,replace=True).mean()))
+print("Sample Mean for Normal Distribution with sample size of 500 : ", "{0:.4f}".format(np.random.choice(data_points,size=500,replace=True).mean()))
+print("-----"*20)
+print("\n")
+
+# Central Limit Theorem 
+# The CLT suggests that with increase in sample size the mean of sample comes closer to normal distribution.
+
+
+sample_mean_normal_5 = []
+sample_mean_normal_10 = []
+sample_mean_normal_20 = []
+sample_mean_normal_100 = []
+sample_mean_normal_500 = []
+
+for i in range(10_000):
+    sample_mean_normal_5.append(np.random.choice(data_points,size=5,replace=True).mean())
+    sample_mean_normal_10.append(np.random.choice(data_points,size=10,replace=True).mean())
+    sample_mean_normal_20.append(np.random.choice(data_points,size=20,replace=True).mean())
+    sample_mean_normal_100.append(np.random.choice(data_points,size=100,replace=True).mean())
+    sample_mean_normal_500.append(np.random.choice(data_points,size=500,replace=True).mean())
+
+
+
+# plt.figure(figsize=(7,10))
+# plt.hist(sample_mean_normal_5,label="Mean with sample size of 5")
+# plt.hist(sample_mean_normal_10,label="Mean with sample size of 10")
+# plt.hist(sample_mean_normal_20,label="Mean with sample size of 20")
+# plt.hist(sample_mean_normal_100,label="Mean with sample size of 100")
+# plt.hist(sample_mean_normal_500,label="Mean with sample size of 500")
+# plt.axvline(data_points.mean(),color='k',linestyle='dashed',linewidth=1)
+# plt.title("Central Limit Theorem for Normal Distribution")
+# plt.legend(loc='upper right')
+# plt.show()
+
+# Practice Problems 
+
+# Most graduate schools of business require applicants for admission to take the Graduate Management Admission Council’s GMAT examination. 
+# Scores on the GMAT are roughly normally distributed with a mean of 527 and a standard deviation of 112. What is the probability of an individual scoring above 500 on the GMAT?
+
+T = norm(loc=527,scale=112)
+print("The Probability of an individial scoring above 500 on the GMAT : ", "{0:.4f}".format(1-T.cdf(500)))
+
+# How high must an individual score on the GMAT in order to score in the highest 5%?
+# Mean = 527
+# Standard Deviation : 112
+
+# P(X > ?) = 0.05
+# P(Z > ?) = 0.05
+# P(Z < ?) = 1 - 0.05 = 0.95
+# P(Z < ?) = 1.645
+# X = 527 + 1.645(112)
+# X = 711.24
+
+
+# The length of human pregnancies from conception to birth approximates a normal distribution with a mean of 266 days 
+# and a standard deviation of 16 days. What proportion of all pregnancies will last between 240 and 270 days (roughly between 8 and 9 months)?
+
+# Mean = loc = 266
+# Standard Deviation = scale = 16
+
+T = norm(loc=266,scale=16)
+print("What proportion of all pregenancies will last between 240 and 270 Days : ", "{0:.4f}".format(T.cdf(270)-T.cdf(240)))
+
+# What length of time marks the shortest 70% of all pregnancies?
+# P (X < ?) = 0.70
+# P (Z < ?) = 0.70
+# P (Z < ?) = 0.70 ==> Z = 0.52
+# X = 266 + 0.52(16)
+# X = 274.32
+
+# The average number of acres burned by forest and range fires in a large New Mexico county is 4,300 acres per year, 
+# with a standard deviation of 750 acres. The distribution of the number of acres burned is normal. What is the probability 
+# that between 2,500 and 4,200 acres will be burned in any given year?
+ 
+# Mean = loc = 4300
+# Standard Deviation = scale = 750
+T = norm(loc=4300,scale=750)
+
+print(" The probability that 2500 to 4200 acres will be burned in any given year is  : ", "{0:.4f}".format(T.cdf(4200)-T.cdf(2500)))
