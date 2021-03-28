@@ -14,6 +14,7 @@
 
 # https://www.stat.colostate.edu/inmem/gumina/st201/recitation8/downloads/Normal%20Probabilites%20Practice.pdf
 
+
 # Sampling Distributions
 
 # Important in inferential statistics where the goal is to draw conclusion about a population
@@ -738,3 +739,32 @@ print("What proportion of all pregenancies will last between 240 and 270 Days : 
 T = norm(loc=4300,scale=750)
 
 print(" The probability that 2500 to 4200 acres will be burned in any given year is  : ", "{0:.4f}".format(T.cdf(4200)-T.cdf(2500)))
+
+
+print("\n")
+print("-----"*20)
+print("-----------------------------------------Exponential Distribution-----------------------------------------")
+
+# The waiting time between arrivals of a Poisson process is Exponential Distribution
+# Single Parameter : Mean Waiting Time 
+
+# Practical Examples
+
+# To predict the amount of waiting time until the next event i.e success, failure, arrival etc.
+
+# The amount of time a consumer finishes browsing and purchases something
+# The amount of time you need to wait until the bus arrives
+
+# Related to Poisson proccess but in Poisson we were interested in "event" happening i.e. rate of 
+# occurence. In Exponential we are more interested to find out the time between two events. 
+
+# Students arrive at a local bar and restaurant according to an approximate Poisson process at a mean rate of 30 
+# students per hour. What is the probability that the bouncer has to wait more than 3 minutes to card the next student?
+
+from scipy.stats import expon
+
+data_points = np.arange(1,10,0.01)
+
+pdf_data_points = expon.pdf(data_points,loc=2)
+
+print(pdf_data_points)
