@@ -8,6 +8,10 @@
 # https://www.mathopolis.com/index.php
 # https://www.mathsisfun.com/data/binomial-distribution.html
 
+# https://towardsdatascience.com/6-useful-probability-distributions-with-applications-to-data-science-problems-2c0bee7cef28
+
+# https://www.askpython.com/python/normal-distribution
+
 # Sampling Distributions
 
 # Important in inferential statistics where the goal is to draw conclusion about a population
@@ -150,7 +154,11 @@ for i in range(10_000):
 # plt.show()
 
 
-# Poisson Distribution 
+print("\n")
+print("-----"*20)
+print("-----------------------------------------Poisson Distribution-----------------------------------------")
+
+# Poisson Distribution
 
 # Estimates how many times an event can happend in specified time. 
 # Describe the probability that an event will occur a certain number of times in a 
@@ -305,14 +313,26 @@ x_rvs = pd.Series(poisson.rvs(mu=1.2,size=100_000,random_state=123))
 # Mean of Hurricanes 
 
 print("Mean of 100_000 Hurricanes : ", x_rvs.mean())
+print("Lambda of Experiment : ", 1.2)
+print("Variance of 100_000 Hurricane :", x_rvs.var())
 
 # Mean equals the mu and lambda
 
 data = x_rvs.value_counts().sort_index().to_dict()
-print(data)
 
 
 
+# Let's draw the PMF of above date
+
+# plt.figure(figsize=(16,6))
+# plt.bar(range(len(data)),list(data.values()),align='center')
+# plt.xticks(range(len(data)),list(data.keys()))
+# plt.title("Hurricane PMF with Poisson Distribution and Lambda of 1.2")
+# plt.show()
+
+print("\n")
+print("-----"*20)
+print("-----------------------------------------Binomial Distribution-----------------------------------------")
 # Binomial Distribution 
 
 # To model binary data i.e. 1 or 0, Yes or No etc.
@@ -340,14 +360,6 @@ print(data)
 # A coin is tossed 20 times. What is the probability of getting exactly 6 heads.
 
 from scipy.stats import binom
-
-n = 10
-p = 0.5
-k = np.arange(0,11)
-
-result = binom.pmf(k,n,p)
-
-print(result)
 
 # simulating Experiment of coin toss 
 
@@ -557,3 +569,81 @@ for i in range(10_000):
 # plt.title("Central Limit Theorem for Binomial Distribution")
 # plt.legend(loc='upper right')
 # plt.show()
+
+
+print("\n")
+print("-----"*20)
+print("-----------------------------------------Normal Distribution-----------------------------------------")
+
+# Continous distribution or a function that can take any values on the real line. 
+
+# Here we have created 2000 random numbers between 1 and 50
+
+x = np.linspace(1,50,10_000)
+
+def normal_dist(x):
+
+    mean = np.mean(x)
+    sd = np.std(x)
+
+    prob_density = (np.pi * sd) * (np.exp(-0.5*((x-mean)/sd)**2))
+    return prob_density
+
+
+pdf = normal_dist(x)
+
+print("Length of pdf : ", len(pdf))
+
+# Let's draw the pdf of normal distribution
+
+# plt.figure(figsize=(12,18))
+# plt.plot(x,pdf,color='red')
+# plt.xlabel("Data Points")
+# plt.ylabel("Probability Density")
+# plt.title("Probability Density Function for Normal Distribution")
+# plt.show()
+
+
+# Let's create some data now 
+
+# PDF : Probability Density Function
+# CDF : Cummulative Distribution Function
+
+from scipy.stats import norm
+import seaborn as sns
+
+# Let's create some random points
+
+data_points = np.arange(1,10,0.01)
+
+pdf_data_points = norm.pdf(data_points,loc=5.5,scale=1) # loc is the location of mean. Default is Zero.
+# scale is the standard deviation of data
+
+
+# sns.set_style('whitegrid')
+# sns.lineplot(data_points,pdf_data_points,color='black')
+# plt.xlabel("Heights")
+# plt.ylabel("Probability Density")
+# plt.title("Height Distribution ")
+# plt.show()
+
+# Practical Question 
+
+# if we were asked to pick one person randomly from this distribution, then 
+# what is the probability that the height of the person will be smaller than 4.5 ft.
+
+T = norm(loc=5.3,scale=1)
+
+print("What is the probability that the height of the person will be smalled than 4.5 Ft :", "{0:.4f}".format((T.cdf(4.5))*100))
+
+# we were asked to pick one person randomly from this distribution, then what is the probability 
+# that the height of the person will be between 6.5 and 4.5 ft. ?
+
+print("What is the probability that a person selected will be between 4.5 ft and 6.5 ft : ", "{0:.4f}".format((T.cdf(6.5) - T.cdf(4.5))*100))
+
+# Law of Large number for Normal Distribution 
+
+data_points = norm.rvs(np.arange(1,50,100_000),scale=1,loc=0)
+
+print(np.mean(data_points))
+print(np.std(data_points))

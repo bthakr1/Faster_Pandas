@@ -481,5 +481,3 @@ def sort_Words(str1):
     return words
 
 
-
-print(sort_Words('I am a boy. She is a girl'))
