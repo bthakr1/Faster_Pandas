@@ -763,8 +763,50 @@ print("-----------------------------------------Exponential Distribution--------
 
 from scipy.stats import expon
 
-data_points = np.arange(1,10,0.01)
+data_points = expon.rvs(size=100_000)
 
-pdf_data_points = expon.pdf(data_points,loc=2)
+# Law of Large number suggests that with increase in sample size the sample mean 
+# comes closer to population mean
 
-print(pdf_data_points)
+print("\n")
+print("-----"*20)
+print("Population Mean for Exponential Distribution : ", "{0:.4f}".format(np.mean(data_points)))
+print("Sample Mean for Exponential Distribution with sample size of 5 : ", "{0:.4f}".format(np.random.choice(data_points,size=5,replace=True).mean()))
+print("Sample Mean for Exponential Distribution with sample size of 10 : ", "{0:.4f}".format(np.random.choice(data_points,size=10,replace=True).mean()))
+print("Sample Mean for Exponential Distribution with sample size of 20 : ", "{0:.4f}".format(np.random.choice(data_points,size=20,replace=True).mean()))
+print("Sample Mean for Exponential Distribution with sample size of 100 : ", "{0:.4f}".format(np.random.choice(data_points,size=100,replace=True).mean()))
+print("Sample Mean for Exponential Distribution with sample size of 500 : ", "{0:.4f}".format(np.random.choice(data_points,size=500,replace=True).mean()))
+print("Sample Mean for Exponential Distribution with sample size of 1000 : ", "{0:.4f}".format(np.random.choice(data_points,size=1000,replace=True).mean()))
+print("-----"*20)
+print("\n")
+
+
+# Central Limit Theorem 
+# The CLT suggests that with increase in sample size the mean of sample comes closer to normal distribution.
+
+
+sample_mean_exponential_5 = []
+sample_mean_exponential_10 = []
+sample_mean_exponential_20 = []
+sample_mean_exponential_100 = []
+sample_mean_exponential_500 = []
+
+for i in range(10_000):
+    sample_mean_exponential_5.append(np.random.choice(data_points,size=5,replace=True).mean())
+    sample_mean_exponential_10.append(np.random.choice(data_points,size=10,replace=True).mean())
+    sample_mean_exponential_20.append(np.random.choice(data_points,size=20,replace=True).mean())
+    sample_mean_exponential_100.append(np.random.choice(data_points,size=100,replace=True).mean())
+    sample_mean_exponential_500.append(np.random.choice(data_points,size=500,replace=True).mean())
+
+
+
+plt.figure(figsize=(7,10))
+plt.hist(sample_mean_exponential_5,label="Mean with sample size of 5")
+plt.hist(sample_mean_exponential_10,label="Mean with sample size of 10")
+plt.hist(sample_mean_exponential_20,label="Mean with sample size of 20")
+plt.hist(sample_mean_exponential_100,label="Mean with sample size of 100")
+plt.hist(sample_mean_exponential_500,label="Mean with sample size of 500")
+plt.axvline(data_points.mean(),color='k',linestyle='dashed',linewidth=1)
+plt.title("Central Limit Theorem for Exponential Distribution")
+plt.legend(loc='upper right')
+plt.show()
