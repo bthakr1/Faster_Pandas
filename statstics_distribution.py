@@ -799,14 +799,15 @@ for i in range(10_000):
     sample_mean_exponential_500.append(np.random.choice(data_points,size=500,replace=True).mean())
 
 
+# Plotting the CLT for Exponential Distribution
 
-plt.figure(figsize=(7,10))
-plt.hist(sample_mean_exponential_5,label="Mean with sample size of 5")
-plt.hist(sample_mean_exponential_10,label="Mean with sample size of 10")
-plt.hist(sample_mean_exponential_20,label="Mean with sample size of 20")
-plt.hist(sample_mean_exponential_100,label="Mean with sample size of 100")
-plt.hist(sample_mean_exponential_500,label="Mean with sample size of 500")
-plt.axvline(data_points.mean(),color='k',linestyle='dashed',linewidth=1)
-plt.title("Central Limit Theorem for Exponential Distribution")
-plt.legend(loc='upper right')
-plt.show()
+# plt.figure(figsize=(7,10))
+# plt.hist(sample_mean_exponential_5,label="Mean with sample size of 5")
+# plt.hist(sample_mean_exponential_10,label="Mean with sample size of 10")
+# plt.hist(sample_mean_exponential_20,label="Mean with sample size of 20")
+# plt.hist(sample_mean_exponential_100,label="Mean with sample size of 100")
+# plt.hist(sample_mean_exponential_500,label="Mean with sample size of 500")
+# plt.axvline(data_points.mean(),color='k',linestyle='dashed',linewidth=1)
+# plt.title("Central Limit Theorem for Exponential Distribution")
+# plt.legend(loc='upper right')
+# plt.show()
