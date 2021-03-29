@@ -42,10 +42,6 @@ np.random.seed(123)
 
 sample_puppies = np.random.choice(puppies,size=(1,5),replace=True)
 
-# mean of the draw of puppies
-
-print(sample_puppies.mean())
-
 # Now let's repeat the experiment of drawing 5 puppoes each time for 10,000 times
 
 sample_props = []
@@ -58,9 +54,9 @@ sample_props = np.array(sample_props)
 
 
 # Similarly for standard deviation and variance
-
-print("Mean for this experiment is : ", sample_props.mean(), "Standard Deviation is : ", sample_props.std(), "And Variance is : ", sample_props.var())
-
+print("-"*100)
+print("Mean for this experiment with sample size of 5 : ", sample_props.mean(), "Standard Deviation is : ", sample_props.std(), "And Variance is : ", sample_props.var())
+print("-"*100)
 # Doing the same sampling but this time we will increase the sample size to 20
 
 sample_props_20 = []
@@ -71,8 +67,9 @@ for i in range(10_000):
 
 sample_props_20 = np.array(sample_props_20)
 
-print("Mean for this experiment is : ", sample_props_20.mean(), "Standard Deviations is : ", sample_props_20.std(), "And Variance is : ", sample_props_20.var())
-
+print("-"*100)
+print("Mean for this experiment with Sample size of 20 : ", sample_props_20.mean(), "Standard Deviations is : ", sample_props_20.std(), "And Variance is : ", sample_props_20.var())
+print("-"*100)
 import matplotlib.pyplot as plt 
 
 # Histogram of both experiments
@@ -104,13 +101,15 @@ hundred_sample_props = np.array(hundred_sample_props)
 # You will see with the increase in sample size, the mean of samples
 # gets closer to the population mean
 
-
+print("\n")
+print("------ Process Law of Large Number ---------")
 print("Population Mean : ", puppies.mean())
 print("Mean with 5 samples : " , np.random.choice(puppies,size=5,replace=True).mean())
 print("Mean with 20 samples : ", np.random.choice(puppies,size=20,replace=True).mean())
 print("Mean with 100 samples : ", np.random.choice(puppies,size=100,replace=True).mean())
 print("Mean with 1000 samples : ", np.random.choice(puppies,size=1000, replace=True).mean())
 print("Mean with 10,000 samples : ", np.random.choice(puppies,size=10_000, replace=True).mean())
+print("\n")
 
 # Central Limit Theorem
 
@@ -267,23 +266,23 @@ for i in range(10_000):
 
 # lambda = 2.5
 
-print("------------------------"*5)
+print("-"*30)
 print("Probability for each Possible Outcome ")
 print("Probability of getting Zero Goal : ", "{0:.4f}".format(poisson.pmf(0,2.5)))
 print("Probability of getting one Goal :", "{0:.4f}".format(poisson.pmf(1,2.5)))
 print("Probability of getting Two Goals : ", "{0:.4f}".format(poisson.pmf(2,2.5)))
 print("Probability of getting Three Goals : ", "{0:.4f}".format(poisson.pmf(3,2.5)))
 print("Probability of getting Four Goals : ", "{0:.4f}".format(poisson.pmf(4,2.5)))
-print("------------------------"*5)
+print("-"*30)
 
 
 # A fast food restaurant gets an average of 2.8 customers approaching the register every minute.
 # Assuming the number of customers approaching the register per minute follows a Poisson distribution, 
 # what is the probability that 4 customers approach the register in the next minute?
 print("\n")
-print("-----"*20)
+print("-"*30)
 print("Probability of getting 4 customer Approach the Register if Lambda is 2.8 : ", "{0:.3f}".format(poisson.pmf(4,2.8)))
-print("-----"*20)
+print("-"*30)
 print("\n")
 
 
@@ -292,9 +291,9 @@ print("\n")
 # the intersection within a minute?
 
 print("\n")
-print("-----"*20)
+print("-"*30)
 print("Probability of getting 3 or more cars if the lambda is 1.6 : ", "{0:.3f}".format(1-poisson.cdf(2,1.6)))
-print("-----"*20)
+print("-"*30)
 print("\n")
 
 # When a computer disk manufacturer tests a disk, it writes to the disk and then tests it using a certifier. The certifier counts the number of missing pulses or errors. 
@@ -302,9 +301,9 @@ print("\n")
 # What percentage of test areas have two or fewer errors?
 
 print("\n")
-print("-----"*20)
+print("-"*30)
 print("Probability of getting 2 or fewer errors if the lambda is 0.2 : ", "{0:.2f}".format(100*poisson.cdf(2,0.2)))
-print("-----"*20)
+print("-"*30)
 print("\n")
 
 # Frequecny of Hurricanes in certain year
