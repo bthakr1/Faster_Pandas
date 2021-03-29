@@ -1,5 +1,9 @@
 # Probability
 
+# Reference 
+
+# https://www.youtube.com/watch?v=CAtUFfkbKjY
+
 # Total Number of Cards : 52
 # Total Number of Red : 26
 ## Hearts : 13
@@ -52,4 +56,20 @@ def nCr(n,r):
 # There are 12 Face Cards
 # There are 4 Ace Cards
 
-print("Probability of getting a 4 Face Cars AND 1 Ace is : ", nCr(12,4)*nCr(4,1))
+print("Number of ways of getting a 4 Face Cars AND 1 Ace is : ", nCr(12,4)*nCr(4,1))
+
+# What is the Probability of Being Dealth with a KING Followed by An Ace
+# Not replacement
+# There are 4 Kings
+# There are 4 Aces 
+
+print("Probability of getting a King followed by an Ace : ", "{0:.4f}".format(((4/52)*(4/51))))
+
+# Probability of getting a Diamond or a King
+# Diamond : 13
+# King : 4
+# King of Diamond : 1
+# OR means both
+# AND means intersection
+
+print("Probability of getting a diamond OR a king : ", (13/52)+(4/52)-(1/13))
