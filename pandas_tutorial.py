@@ -1,6 +1,8 @@
 
 import pandas as pd 
 import numpy as np 
+import seaborn as sns
+
 
 # getting version number 
 
@@ -46,6 +48,43 @@ print(df)
 
 print(df.loc[::-1])
 
+# Let's get some data frame 
+print("-"*200)
+print("\n")
+print("New Section Start : ")
+
+df = sns.load_dataset('geyser')
+
+print(df.head())
+
 # with indexing also starting from 0
 
-print(df.loc[::-1].reset_index(drop=True))
+print(df.loc[::-1].reset_index(drop=True).head())
+
+# Reverse columns order
+
+print(df.loc[:,::-1].head())
+
+# Selecting number columns only
+
+only_numeric = df.select_dtypes(include='number').columns
+
+print("Only Numberic Columns : ", only_numeric)
+
+# Selecting object columns only
+
+only_object = df.select_dtypes(include='object').columns
+
+print("Only Object Columns : ", only_object)
+
+# Selecting only date columns 
+
+only_date = df.select_dtypes(include='datetime').columns
+
+print("Only Date Columns : ", only_date)
+
+# Do not select object columns
+
+except_object = df.select_dtypes(exclude='object').columns
+
+print("Everything Except Object Columns : ", except_object)
