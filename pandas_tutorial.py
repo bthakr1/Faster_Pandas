@@ -2,6 +2,8 @@
 import pandas as pd 
 import numpy as np 
 import seaborn as sns
+import matplotlib.pyplot as plt 
+plt.style.use('ggplot')
 
 
 # getting version number 
@@ -229,3 +231,96 @@ print("How about how many ends with A in the first_name")
 print(df['first_name'].str.endswith('a'))
 print("Count of names ending with A :", df['first_name'].str.endswith('a').sum())
 
+# Let's count on how many people are from same county
+
+print(df['county'].value_counts(sort=True))
+
+# How about domain names
+
+print(pd.crosstab(df['county'],df['domain']))
+
+# Let's remove any zero columns
+
+cross_tab_county_domain = pd.DataFrame(pd.crosstab(df['county'],df['domain'],margins=True,margins_name="Total"))
+
+# Remove any column with 0 entries
+
+print(cross_tab_county_domain.loc[:,(cross_tab_county_domain != 0).any(axis=0)])
+
+# Remove any row with 0 entries
+
+print(cross_tab_county_domain.loc[(cross_tab_county_domain != 0).any(axis=1),:])
+
+# Let's get the margin values. Only top 5
+
+print(cross_tab_county_domain.iloc[-1,:-1].sort_values(ascending=False).head(5))
+
+# Let's get the sns datasets again
+
+print("SNS Dataset Names : ", sns.get_dataset_names())
+
+# changing the dataframe 
+# We are going to use mpg as we will be exploring filtering and pivoting a lot
+print("\n")
+print("*"*100,"New Data Frame : mpg","*"*100)
+print("\n")
+df = sns.load_dataset('mpg')
+
+# Let's do some filtering
+
+print("Lets get rows where weight is higher than 3400 and model year is smaller than 75")
+
+print(df[(df['weight'] > 3400) & (df['model_year'] < 75)])
+
+# How about origin not in USA
+
+print("Origin not in USA")
+
+print(df[df['origin'] != 'usa'])
+
+# Let's see the average, min, median, and max mpg for all the countries
+
+table = pd.pivot_table(df,index=['origin'],aggfunc={'mpg':[np.median,np.mean,np.max,np.min]})
+print(table)
+print("seems like Japan has the highest mpg & USA the lowest")
+
+# How about average, min, median, and max horsepower for all the countries
+
+table = pd.pivot_table(df,index=['origin'],aggfunc={'horsepower':[np.median,np.mean,np.max,np.min]})
+print(table)
+print("US has the highest horsepower while Japan the lowest")
+
+# Let's combine both 
+
+table = pd.pivot_table(df,index=['origin'],aggfunc={'mpg':[np.median],
+                                                    'horsepower':[np.median]})
+
+print(table)
+
+# How about model year and origin
+# Just for mpg
+
+table = pd.pivot_table(df,index=['model_year','origin'],aggfunc={'mpg':[np.median],'horsepower':[np.median]})
+print(table)
+
+# Does US cars have more Cylinders
+
+table = pd.pivot_table(df,index=['origin'],columns=['cylinders'],aggfunc='size',fill_value=0)
+print(table)
+
+# How about distribution of Origin and Model years
+
+table = pd.DataFrame(pd.pivot_table(df,index=['model_year'],columns=['origin'],aggfunc='size'))
+
+print(table)
+
+# Let's see how many cars by origin and cylinders and their respective horsepower
+
+table = pd.pivot_table(df,index=['origin'],columns=['cylinders'],values=['horsepower'],aggfunc=np.median,fill_value='NA')
+
+print(table)
+
+# Let's see the same for mpg
+
+table = pd.pivot_table(df,index=['cylinders'],columns=['origin'],values=['mpg'],aggfunc=np.median)
+print(table)
