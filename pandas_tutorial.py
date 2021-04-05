@@ -162,6 +162,70 @@ print(df.iloc[19:23,3:8])
 
 # Next we will try loc
 
-df.set_index('city',inplace=True)
+print(df.county.value_counts())
+
+df.set_index('county',inplace=True)
+
+# Filetring everything with index as "Greater London"
+print("\n")
+print("Filetring everything with index as 'Greater London'")
+print("\n")
+print(df.loc['Greater London'])
+
+# Let's do something interesting
+
+# Print everyone who is using study.co.uk
+print("\n")
+print("Print everyone who is using study.co.uk")
+print("\n")
+print(df.loc[df['email'].str.contains('study.co.uk')])
+
+# How about with gmail.com
+print("\n")
+print("Print everyone who is using gmail.com")
+print("\n")
+print(df.loc[df['email'].str.contains('gmail.com')])
+
+# Last name as Katie
+print("\n")
+print("Print everyone who has a last name Katie")
+print("\n")
+print(df.loc[df['last_name'].str.contains('Katie')])
+
+df.reset_index(inplace=True)
+
+# Had a lot of fun with iloc and loc
+
+# Some string manipulation
+
+df[['area_code_phone_1','real_phone_phone_1']] = df['phone1'].str.split('-',expand=True)
 
 print(df.head())
+
+# Let's get the area code and phone number 2 for phone number 2
+
+df[['area_code_phone_2','real_phone_phone_2']] = df['phone2'].str.split('-',expand=True)
+
+print(df.tail())
+
+# Let's get domain names from the email ids
+
+df.drop(['area_code_phone_1','real_phone_phone_1','area_code_phone_2','real_phone_phone_2'],axis=1,inplace=True)
+
+print("Getting domain names from the email ids")
+
+df[['email','domain']] = df['email'].str.split('@',expand=True)
+
+print(df.head())
+
+# Let's see how many names start with A in first_name
+
+print("Let's see how many names start with A in first_name")
+print(df['first_name'].str.startswith('A'))
+print("Count of names starting with A :" , df['first_name'].str.startswith('A').sum())
+# How about how many ends with A in the first_name
+
+print("How about how many ends with A in the first_name")
+print(df['first_name'].str.endswith('a'))
+print("Count of names ending with A :", df['first_name'].str.endswith('a').sum())
+
