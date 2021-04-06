@@ -413,4 +413,20 @@ labels = ['0','0 to 10','10 to 20','20 to 30','30 to 40','40 to 50','50 to 60','
 
 df['binned_age'] = pd.cut(df['age'],bins=bins,labels=labels)
 
-print(df.head())
+# Now Let's see if the age has any influence on the survial 
+
+table = pd.pivot_table(df,index=['alive'],columns=['binned_age'],aggfunc='size')
+
+# Now let's see if the age had any influence on survival
+
+contingency_table_alive_age = pd.crosstab(df['alive'],df['binned_age'])
+
+stat, p , dof, expected = chi2_contingency(contingency_table_alive_age)
+
+print("The p value is : ", "{0:.4f}".format(p))
+
+if p <= alpha:
+    print("There is a relationship between age and survival")
+else:
+    print("No relatonship between Age and Survival")
+
