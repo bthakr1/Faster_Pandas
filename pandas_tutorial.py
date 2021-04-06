@@ -324,3 +324,93 @@ print(table)
 
 table = pd.pivot_table(df,index=['cylinders'],columns=['origin'],values=['mpg'],aggfunc=np.median)
 print(table)
+
+# Let's do it again on Titanic Datasets
+
+df = sns.load_dataset('titanic')
+
+# Let's see how many men and women were there
+
+print(df['sex'].value_counts())
+
+print(df.head())
+
+# Survived or not survived based on sex
+
+table = pd.pivot_table(df,index=['alive'],columns=['sex'],aggfunc='size')
+
+print(table)
+
+# same thing can be done with cross tab
+
+print(100*pd.crosstab(df['alive'],df['sex'],margins=True,margins_name="Total",normalize=True))
+
+# Let's see the same for class
+
+table = pd.pivot_table(df,index=['alive'],columns=['class'],aggfunc='size')
+
+print(table)
+
+# Really interesting. 
+# I am curious if we have any independence between "Class" and "Survival"
+
+# We can use Chi Square Test for this
+# Both features are "discrete"
+# Null Hypothesis : There is no relationship between the "Class" and "Survival"
+# Alternate Hypothesis : There is a significant realtionship between the "Class" and "Survival"
+
+# Remember "If p is low H0 must go"
+# p value is also called alpha value and denotes the probability of erroronesously rejecting H0
+# when H0 is True
+# Degree of Freedom = (number of rows - 1) * (number of columns - 1)
+
+from scipy.stats import chi2_contingency
+
+contingency_table_alive_class = pd.crosstab(df['alive'],df['class'])
+
+stat, p, dof, expected = chi2_contingency(contingency_table_alive_class)
+
+alpha = 0.05
+
+print("p value is " + str(p))
+
+if p <= alpha:
+    print("Dependent (reject H0) : Survival and Class are Dependent")
+else:
+    print("Fail to reject Null Hypothesis : Survial and Class are Independent")
+
+contingency_table_alive_sex = pd.crosstab(df['alive'],df['sex'])
+
+stat, p, dof, expected = chi2_contingency(contingency_table_alive_sex)
+
+print("p value is " + str(p))
+
+if p <= alpha:
+    print("Dependent (reject H0) : Survival and Sex are Dependent")
+else:
+    print("Fail to reject Null Hypothesis : Survial and Sex are Independent")
+
+# Back to pivot tables
+
+# Let's see the average age of Survining and Not Surviving members
+
+table = pd.pivot_table(df,index=['alive'],columns=['age'],aggfunc={'age':[np.median,np.mean,np.min,np.max]})
+
+print(table)
+
+# Hmm a lot of age. Let's bin those.
+# But first let's see the distribution
+
+print(df['age'].describe())
+
+# Minimum is 0 and Maximum is 80
+
+# Let's cut this into 10 pieces
+
+bins = list(np.linspace(0,100,11))
+
+labels = ['0','0 to 10','10 to 20','20 to 30','30 to 40','40 to 50','50 to 60','60 to 70','70 to 80','80 to 90']
+
+df['binned_age'] = pd.cut(df['age'],bins=bins,labels=labels)
+
+print(df.head())
