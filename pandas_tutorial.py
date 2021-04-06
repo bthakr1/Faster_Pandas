@@ -430,3 +430,20 @@ if p <= alpha:
 else:
     print("No relatonship between Age and Survival")
 
+# Now I want to asses if the "Fare" had any "relation" with survival
+# Fair is continous while survival is discrete
+
+import statsmodels.api as sm
+import statsmodels.formula.api as smf
+
+new_df = df[['fare','alive']]
+
+new_df['alive'] = new_df['alive'].astype('str')
+
+results = smf.ols('alive ~ fare', data=new_df).fit()
+
+print(results.summary2())
+
+
+
+
