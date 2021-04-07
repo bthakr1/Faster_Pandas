@@ -430,20 +430,20 @@ if p <= alpha:
 else:
     print("No relatonship between Age and Survival")
 
-# Now I want to asses if the "Fare" had any "relation" with survival
-# Fair is continous while survival is discrete
+# Let' see the power of Group BY
+# Though with pivot table most of the things can be done very easily
 
-import statsmodels.api as sm
-import statsmodels.formula.api as smf
+print("Row Count for each Class ")
+print(df.groupby(['class']).size())
 
-new_df = df[['fare','alive']]
+# Find different values for each group
 
-new_df['alive'] = new_df['alive'].astype('str')
+print(df.groupby(['class']).groups.keys())
 
-results = smf.ols('alive ~ fare', data=new_df).fit()
+# Let's get average fare for each class
 
-print(results.summary2())
+print(df.groupby(['class'])['fare'].mean())
 
+# How about the sex
 
-
-
+print(df.groupby(['sex'])['fare'].mean())
