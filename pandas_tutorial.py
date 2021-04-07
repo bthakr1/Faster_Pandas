@@ -447,3 +447,16 @@ print(df.groupby(['class'])['fare'].mean())
 # How about the sex
 
 print(df.groupby(['sex'])['fare'].mean())
+
+# Let's see by two columns now 
+
+print(df.groupby(['sex','class']).agg({'fare':['mean','min','max']}))
+
+# the same thing through pivot table
+
+table = pd.pivot_table(df,index=['sex','class'],aggfunc={'fare':[np.mean,np.min,np.max]})
+print(table)
+
+# Let's see average , minimum, and maximum age for each class
+
+print(df.groupby(['class']).agg({'age':['mean','min','max']}))
