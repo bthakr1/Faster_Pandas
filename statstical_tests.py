@@ -1,7 +1,7 @@
 import pandas as pd 
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 df = sns.load_dataset('titanic')
 
@@ -57,3 +57,66 @@ for i in range(len(result.critical_values)):
     else:
         print("Probably not Gaussian at the %.1f%% level"%(sl))
 
+# Since Age is Not Gaussian , we will do some transformation
+
+# Applying Power Transformation
+
+df['AGE_POWER'] = np.exp(df['age'])
+
+result = anderson(df['AGE_POWER'])
+
+for i in range(len(result.critical_values)):
+    sl, cv = result.significance_level[i],result.critical_values[i]
+    if result.statistic < 0.05:
+        print("Probably Gaussian at the %.1f%%"%(sl))
+    else:
+        print("Probably not Gaussian at the %.1f%%"%(sl))
+
+# Applying Log Transformation
+
+df['AGE_LOG'] = np.log(df['age'])
+
+result = anderson(df['AGE_LOG'])
+
+for i in range(len(result.critical_values)):
+    sl, cv = result.significance_level[i],result.critical_values[i]
+    if result.statistic < 0.05:
+        print("Probably Gaussian at the %.1f%%"%(sl))
+    else:
+        print("Probably not Gaussian at the %.1f%%"%(sl))
+
+# Correlation Tests 
+
+# Pearson's Correlation
+
+# Assumptions :
+
+# Samples are IID
+# Are Normally Distributed
+# Have same variance
+
+# H0 : The samples are Independent
+# H1 : The samples are not Independent
+
+from scipy.stats import pearsonr
+
+df = df.dropna()
+
+stat, p = pearsonr(df['age'],df['fare'])
+
+print('stat=%.3f, p=%.3f'%(stat,p))
+
+if p > 0.05:
+    print("{} and {} are Independent".format('age','fare'))
+else:
+    print("{} and {} Dependent".format('age','fare'))
+
+# Relationship plot between age and fare
+
+sns.relplot(df['age'],df['fare'])
+
+sns.relplot(df['age'],df['fare'],hue=df['class'])
+
+sns.relplot(df['age'],df['fare'],hue=df['class'],style=df['class'])
+
+sns.relplot(x='age',y='fare',size='class', hue='class', data=df)
