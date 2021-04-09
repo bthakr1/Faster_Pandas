@@ -113,10 +113,15 @@ else:
 
 # Relationship plot between age and fare
 
-sns.relplot(df['age'],df['fare'])
+sns.relplot(x='age',y='fare',data=df)
 
-sns.relplot(df['age'],df['fare'],hue=df['class'])
+sns.relplot(x='age',y='fare',hue='class',data=df)
 
-sns.relplot(df['age'],df['fare'],hue=df['class'],style=df['class'])
+sns.relplot(x='age',y='fare',hue='class',style='class',data=df)
 
-sns.relplot(x='age',y='fare',size='class', hue='class', data=df)
+sns.relplot(x='age',y='fare',size='class',hue='class', data=df)
+
+sns.relplot(x='age',y='fare',hue='class',col='who',data=df)
+
+sns.relplot(x='age',y='fare',hue='class',col='who',row='alive',data=df)
+
