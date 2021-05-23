@@ -67,9 +67,9 @@ for i in range(10_000):
 
 sample_props_20 = np.array(sample_props_20)
 
-print("-"*100)
+print("-"*200)
 print("Mean for this experiment with Sample size of 20 : ", sample_props_20.mean(), "Standard Deviations is : ", sample_props_20.std(), "And Variance is : ", sample_props_20.var())
-print("-"*100)
+print("-"*200)
 import matplotlib.pyplot as plt 
 
 # Histogram of both experiments

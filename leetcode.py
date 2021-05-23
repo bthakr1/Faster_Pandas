@@ -480,4 +480,128 @@ def sort_Words(str1):
 
     return words
 
+# Problem Set 938
 
+# 938. Range Sum of BST
+
+# Given the root node of a binary search tree and two integers low and high, return the sum of values of all 
+# nodes with a value in the inclusive range [low, high].
+
+
+
+
+class Solution:
+
+    def maxArea(self,height):
+
+        from itertools import combinations
+
+        dict_data = [{index:value} for index, value in enumerate(height)]
+
+        comb = list(combinations(dict_data,2))
+
+        volume = lambda h1, h2 : abs(list(h1.keys())[0] - list(h2.keys())[0]) * min(list(h1.values())[0],list(h2.values())[0])
+
+        return max(volume(c[0],c[1]) for c in comb)
+
+
+class Solution:
+
+    def letterCombinations(self,digits):
+
+
+        if digits == "":
+
+            return []
+
+        from itertools import product
+
+        mapping = {
+                2: "abc",
+                3: "def",
+                4: "ghi",
+                5: "jkl",
+                6: "mno",
+                7: "pqrs",
+                8: "tuv",
+                9: "wxyz"
+                }
+
+        lists = [mapping[int(i)] for i in digits]
+
+        return list(product(*lists))
+
+
+class Solution:
+
+    def intersection(self,list1,list2):
+
+        set1 = set(list1)
+        set2 = set(list2)
+
+        return list(set2 & set1)
+
+
+class Solution:
+
+    def gcdOfString(self,s,t):
+
+        if not s: return t
+        if not t: return s
+
+        s,t = (s,t) if len(s) <= len(t) else(t,s)
+
+        if t[:len(s)] == s:
+
+            return self.gcdOfString(t[len(s):],s)
+
+        return ''
+
+
+
+#1539. Kth Missing Positive Number
+
+class Solution(object):
+    def findKthPositive(self,arr,k):
+        """
+        :type arr : List[int]
+        :type k : int
+        :rtype : int
+        """
+        i = 1
+        counter = 0
+
+        while True:
+            if i not in arr:
+                counter += 1
+                if counter==k:
+                    return i
+            i+=1
+
+class Mini:
+
+    def __init__(self,value_a,value_b):
+        self.value_a = value_a
+        self.value_b = value_b
+    
+    def is_a_smaller(self):
+        if self.value_a < self.value_b:
+            return self.value_a
+        else:
+            return self.value_b
+
+    def comapre_to_10(self):
+        if self.value_a > 10:
+            return self.value_a
+        else:
+            return self.value_b
+
+s = Mini(14, 5)
+
+smaller = s.is_a_smaller()
+
+comapre = s.comapre_to_10()
+
+print(smaller)
+print(comapre)
+    

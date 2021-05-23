@@ -96,3 +96,33 @@ print("Proabbility of getting a 3 : ", 4/52)
 # Probability of NOT getting a 3
 
 print("Probability of NOT getting a 3 : ", 1-(4/52))
+
+# Probability of drawing a 3 or a heart
+
+print("Probability of drawing a 3 OR a heart : ", "{0:2.2f}%".format(100*((4/52)+(13/52)-(1/52))))
+
+# Probability of selecting a 2 or 3
+
+print("Probability of drawing a 2 or a 3 : ", "{0:.4f}".format((4/52)+(4/52)))
+
+# Probability of getting a Red 2 or a black 3
+
+print("Probability of getting a Red 2 OR a Black 3 : ", (2/52)+(2/52))
+
+# Probability of getting a 2 of Hearts or 3 of Spades
+
+print("Probability of getting a 2 of Heart or 3 of Spades : ", (1/52)+(1/52) )
+
+# Permutation : Ways to arrange. n!
+# If the Order is Important : n! / (n-r)! 
+# out of n choose r then n!/(n-r)!
+
+
+# Combinations : Order is not important. n! / (r!(n-r)!)
+
+# A 4 digit PIN is selected. What is the probability that there are no repeated digits?
+
+print("Probability of Selecting 4 Digit Pin that there are no repeated digits : ", 10*9*8*7)
+
+print("Probability of Selecting 4 Digit Pin that there are no repeated digits : ", nPr(10,4))
+

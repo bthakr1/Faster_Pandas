@@ -460,3 +460,4 @@ print(table)
 # Let's see average , minimum, and maximum age for each class
 
 print(df.groupby(['class']).agg({'age':['mean','min','max']}))
+
